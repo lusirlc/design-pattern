@@ -7,6 +7,20 @@ package chain_of_responsibility;
  */
 public class Main {
 	public static void main(String[] args) {
-	
+		Manager commonManager = new CommonManager("经理");
+		Manager majordomoManager = new MajordomoManager("总监");
+		Manager generalManager = new GeneralManager("总经理");
+		// 设置责任链
+		commonManager.setSuperManager(majordomoManager);
+		majordomoManager.setSuperManager(generalManager);
+		
+		// 请求
+		Request request = new Request();
+//		request.setType("请假");
+		request.setType("加薪");
+		request.setCount(700);
+		
+		// 提出请求
+		commonManager.requestApplications(request);
 	}
 }
